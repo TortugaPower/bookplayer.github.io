@@ -1,0 +1,17 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tortugapower.audiobookplayer",
+      "sha256_cert_fingerprints": [
+        "EE:98:5D:EA:9A:3F:F4:54:B7:F3:9F:48:A4:27:BF:79:7C:49:FC:C9:7C:3B:BF:13:9D:5C:19:EA:60:44:B8:65",
+        "AA:C5:0F:E4:23:66:56:95:37:0C:14:05:DA:9F:FD:E9:BD:FF:7E:11:BC:DD:BA:34:B2:8C:3A:0B:5D:F4:E2:79",
+        "57:69:5A:C5:99:0B:A6:5D:90:25:97:4A:CF:30:35:C4:93:38:F2:92:7D:56:66:7B:98:79:A6:AD:53:1A:98:71"
+      ]
+    }
+  }
+]
