@@ -1,0 +1,5 @@
+# Local Jekyll build artifacts
+_site/
+.jekyll-cache/
+.jekyll-gems/
+.sass-cache/
