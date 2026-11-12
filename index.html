@@ -1,133 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>BookPlayer</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			border: 0;
-			box-sizing: border-box;
-		}
-
-		body {
-			min-height: 100vh;
-			display: grid;
-			align-content: center;
-			justify-content: center;
-			overflow: auto;
-			background: #fff;
-			font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-			padding: 24px;
-		}
-
-		.card {
-			width: 380px;
-			max-width: 100%;
-			padding: 40px 28px 28px;
-			border: 1px solid #e5e5e7;
-			border-radius: 20px;
-			text-align: center;
-		}
-
-		.logo {
-			width: 200px;
-			height: 200px;
-		}
-
-		.wordmark {
-			margin-top: 16px;
-			font-size: 40px;
-			font-weight: 300;
-			color: #232a7a;
-		}
-
-		.badges {
-			margin-top: 28px;
-			display: flex;
-			gap: 16px;
-			justify-content: center;
-			align-items: flex-start;
-			flex-wrap: wrap;
-		}
-
-		.store {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 10px;
-		}
-
-		.badge-official {
-			height: 44px;
-			width: auto;
-			display: block;
-		}
-
-		.source {
-			display: inline-flex;
-			align-items: center;
-			gap: 6px;
-			font-size: 13px;
-			color: #8e8e93;
-			text-decoration: none;
-		}
-
-		.source .gh-icon {
-			width: 15px;
-			height: 15px;
-		}
-
-		.source:hover span {
-			text-decoration: underline;
-		}
-
-		.legal {
-			margin-top: 24px;
-			font-size: 13px;
-			color: #8e8e93;
-		}
-
-		.legal a {
-			color: #8e8e93;
-			text-decoration: none;
-		}
-
-		.legal a:hover {
-			text-decoration: underline;
-		}
-	</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookPlayer</title>
+<meta name="description" content="A wonderful player for your audiobooks. Free and open source, on iPhone, Android and the web. Sign in, and your library and progress go with you.">
+<meta name="theme-color" content="#3a74c8">
+<link rel="icon" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BookPlayer">
+<meta property="og:url" content="https://bookplayer.app/">
+<meta property="og:title" content="BookPlayer">
+<meta property="og:description" content="A wonderful player for your audiobooks. Free and open source, on iPhone, Android and the web.">
+<meta property="og:image" content="https://bookplayer.app/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BookPlayer">
+<meta name="twitter:description" content="A wonderful player for your audiobooks. Free and open source, on iPhone, Android and the web.">
+<meta name="twitter:image" content="https://bookplayer.app/logo.png">
+<script>
+  /* Phones and tablets get the store button, everything else the desktop download (also the no-JS default). */
+  (function () {
+    var d = document.documentElement, ua = navigator.userAgent || '';
+    var iPadOS = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+    if (/iPhone|iPod|iPad|Android/i.test(ua) || iPadOS) d.className += ' is-phone';
+    if (/Android/i.test(ua)) d.className += ' is-android';
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/assets/landing/landing.css">
+<script src="/assets/landing/landing.js" defer></script>
 </head>
 <body>
-	<main class="card">
-		<img class="logo" src="logo.png" width="200" height="200" alt="BookPlayer logo">
-		<h1 class="wordmark">BookPlayer</h1>
-		<div class="badges">
-			<div class="store">
-				<a href="https://apps.apple.com/app/id1138219998" aria-label="Download BookPlayer on the App Store">
-					<img class="badge-official" src="appstore-badge.svg" alt="Download on the App Store">
-				</a>
-				<a class="source" href="https://github.com/TortugaPower/BookPlayer">
-					<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-					<span>Source</span>
-				</a>
-			</div>
-			<div class="store">
-				<a href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer" aria-label="Get BookPlayer on Google Play">
-					<img class="badge-official" src="googleplay-badge.svg" alt="Get it on Google Play">
-				</a>
-				<a class="source" href="https://github.com/TortugaPower/bookplayer-android">
-					<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-					<span>Source</span>
-				</a>
-			</div>
-		</div>
-		<p class="legal"><a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Use</a></p>
-	</main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.3l-5.9 3.2 1.2-6.5-4.8-4.6 6.6-.9z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10.5l5 5 5-5"/><path d="M5 20h14"/></g></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></g></symbol>
+</svg>
+
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <!-- Sound waves, as in the app icon and the Android banner: rings spread from the bottom-left corner toward the phone -->
+    <div class="waves" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#top">
+        <span class="brand-icon"><img src="/logo.png" alt="" width="44" height="44"></span>
+        BookPlayer
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#support">Support</a>
+        <a class="nav-gh" href="https://github.com/TortugaPower/BookPlayer">GitHub</a>
+      </div>
+    </nav>
+
+    <div class="hero-main" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Free · Open source</p>
+        <h1>A wonderful player for your audiobooks.</h1>
+        <p class="lead lead-desktop">Listen on your computer, your phone or right in the browser. Sign in, and your library and progress go with you.</p>
+        <p class="lead lead-phone">Listen on your phone, your computer or right in the browser. Sign in, and your library and progress go with you.</p>
+
+        <!-- Desktop: the computer you're on first, the others one click away -->
+        <div class="dl-desktop">
+          <div class="dl-block">
+            <div class="split" data-platforms>
+              <!-- Disabled until the first desktop release: see DESKTOP_URL in /assets/landing/landing.js -->
+              <button type="button" class="split-main" id="desktop-download" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
+                <span>Download for <span data-platform-label>macOS</span></span>
+                <span class="soon">Coming soon</span>
+              </button>
+              <button type="button" class="split-toggle" aria-label="Other platforms" aria-expanded="false" aria-controls="platform-menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <ul class="platforms" id="platform-menu" aria-label="Platforms" hidden>
+                <li><button type="button" data-platform="mac" aria-current="true"><span>macOS</span><span>Apple silicon and Intel</span></button></li>
+                <li><button type="button" data-platform="windows"><span>Windows</span><span>Installer (.exe)</span></button></li>
+                <li><button type="button" data-platform="linux"><span>Linux</span><span>AppImage</span></button></li>
+              </ul>
+            </div>
+            <p class="dl-alt">Or <a class="hero-link" href="https://web.bookplayer.app">use it in your browser</a>, nothing to install.</p>
+          </div>
+
+          <!-- The phone apps, quieter: outline buttons -->
+          <div class="on-phone">
+            <span class="on-phone-label">On your phone</span>
+            <a class="outline-btn" href="https://apps.apple.com/us/app/bookplayer/id1138219998">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg>
+              App Store
+            </a>
+            <a class="outline-btn" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"/></svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+
+        <!-- Phone: the store for the phone you're on -->
+        <div class="dl-phone">
+          <div class="dl-block">
+            <a class="store-btn only-ios" href="https://apps.apple.com/us/app/bookplayer/id1138219998">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
+              <span>Download for iPhone</span>
+            </a>
+            <a class="store-btn only-android" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
+              <span>Download for Android</span>
+            </a>
+            <p class="store-note">Free on the <span class="only-ios">App Store</span><span class="only-android">Google Play</span> · <button type="button" class="store-switch" data-store-switch>On <span class="only-ios">Android</span><span class="only-android">iPhone</span>?</button></p>
+          </div>
+          <!-- Computers and the browser, quieter -->
+          <p class="also-on">
+            <span>Also on</span>
+            <span class="nowrap"><span class="soon-text" id="desktop-soon"><b>Mac, Windows and Linux</b> (coming soon)</span> <span aria-hidden="true">·</span></span>
+            <a class="hero-link" href="https://web.bookplayer.app">the web</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Phone mockup, in the Android banner's style: upright, thin bezel, camera pill -->
+      <div class="mockup" aria-hidden="true">
+        <div class="device">
+          <span class="device-btn b1"></span>
+          <span class="device-btn b2"></span>
+          <span class="device-btn b3"></span>
+          <img class="device-screen" src="/assets/landing/player.jpg" alt="" width="700" height="1555" fetchpriority="high">
+          <span class="device-camera"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Chapter 1: Listening experience -->
+    <section class="section bg-grey" id="features" aria-labelledby="listen-title">
+      <div class="wrap stack">
+        <div class="head">
+          <span class="numeral" aria-hidden="true">01</span>
+          <p class="chapter">Chapter 1</p>
+          <h2 class="h2" id="listen-title">Your listening experience</h2>
+          <p class="sub">Made for books that last hours, not songs that last minutes.</p>
+        </div>
+        <ul class="features">
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M9.5 13l2.5-2 2.5 2"/></svg>
+            <div><h3>Lock screen controls</h3><p>Play, pause and skip from the lock screen, control center or your headphones.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <div><h3>Chapters</h3><p>Play and jump between chapters, or back to the start of the book.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.3 17a9 9 0 1 1 17.4 0"/></svg>
+            <div><h3>Playback speed</h3><p>Slow down a dense chapter or speed through the recap.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            <div><h3>Smart rewind</h3><p>Goes back a little when you return after a longer pause, so you never lose the thread.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+            <div><h3>Volume boost</h3><p>Doubles the volume for quiet recordings and noisy commutes.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <div><h3>Sleep timer</h3><p>Stop after a set time or at the end of the chapter.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Chapter 2: Collection + import -->
+    <section class="section" id="collection" aria-labelledby="collection-title">
+      <div class="wrap cols">
+        <div class="col-a">
+          <span class="numeral" aria-hidden="true">02</span>
+          <p class="chapter">Chapter 2</p>
+          <h2 class="h2" id="collection-title">Manage your collection</h2>
+          <ul class="checks">
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>See the progress of every book at a glance</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Mark books as finished</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Drag and drop to sort your library</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Group books into folders that play in order, starting from the first one you haven't finished</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Bookmarks to come back to a moment</li>
+          </ul>
+        </div>
+
+        <div class="col-b">
+          <h2 class="h2">Import your files</h2>
+          <div class="card imports">
+            <div class="import">
+              <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+              <div class="tile-text"><span>From your files</span><span>Files on iPhone, your Android storage, or drag onto the web and desktop apps</span></div>
+            </div>
+            <div class="import">
+              <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>
+              <div class="tile-text"><span>AirDrop and sharing</span><span>Send books from your Mac or another device</span></div>
+            </div>
+            <div class="import">
+              <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span>
+              <div class="tile-text"><span>Your media server</span><span>Connect Jellyfin or Audiobookshelf and stream your own library</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 3: Community -->
+    <section class="section bg-grey" id="community" aria-labelledby="community-title">
+      <div class="wrap stack">
+        <div class="community-head">
+          <div class="head">
+            <span class="numeral" aria-hidden="true">03</span>
+            <p class="chapter">Chapter 3</p>
+            <h2 class="h2" id="community-title">Community</h2>
+            <p class="sub">Loved by listeners, and built in the open.</p>
+          </div>
+          <div class="rating">
+            <span class="rating-num">4.8</span>
+            <div class="rating-meta">
+              <span class="stars" role="img" aria-label="4.8 out of 5 stars">
+                <svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg>
+              </span>
+              <span class="muted">Nearly 20,000 ratings on the App Store</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real App Store reviews (US). On narrow screens they scroll sideways, each one snapping into place. -->
+        <ul class="reviews" aria-label="Reviews">
+          <li class="card review">
+            <span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <h3>Excellent Quality for a free app!</h3>
+            <p>While you can pay for extra features, all of the core features are completely free. This is an amazing app and I’m so thankful it exists!</p>
+            <p class="by">ndjxnanja · App Store review</p>
+          </li>
+          <li class="card review">
+            <span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <h3>Love it</h3>
+            <p>Love the app, it allows me to keep track of chapters and I am able to make folders and group together the novels I am listening to.</p>
+            <p class="by">Kubatv · App Store review</p>
+          </li>
+          <li class="card review">
+            <span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <h3>Awesome</h3>
+            <p>… Just a fantastic app that does exactly what it needs to - it has become indispensable for me!</p>
+            <p class="by">Emberstorm76 · App Store review</p>
+          </li>
+        </ul>
+
+        <div class="card contrib">
+          <div class="contrib-text">
+            <h3>Made by 42 contributors</h3>
+            <p>Fix a bug, translate the app or suggest a feature on GitHub.</p>
+          </div>
+          <!-- Top contributors; narrow screens show the first 8 -->
+          <ul class="avatars">
+            <li class="avatar"><a href="https://github.com/GianniCarlo" aria-label="GianniCarlo on GitHub" title="GianniCarlo"><img src="/assets/landing/contributors/GianniCarlo.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/Hirobreak" aria-label="Hirobreak on GitHub" title="Hirobreak"><img src="/assets/landing/contributors/Hirobreak.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/pichfl" aria-label="pichfl on GitHub" title="pichfl"><img src="/assets/landing/contributors/pichfl.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/jeremygrenier" aria-label="jeremygrenier on GitHub" title="jeremygrenier"><img src="/assets/landing/contributors/jeremygrenier.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/s00d" aria-label="s00d on GitHub" title="s00d"><img src="/assets/landing/contributors/s00d.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/thai-d-v" aria-label="thai-d-v on GitHub" title="thai-d-v"><img src="/assets/landing/contributors/thai-d-v.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/matalvernaz" aria-label="matalvernaz on GitHub" title="matalvernaz"><img src="/assets/landing/contributors/matalvernaz.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/e7mac" aria-label="e7mac on GitHub" title="e7mac"><img src="/assets/landing/contributors/e7mac.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/ryantstone" aria-label="ryantstone on GitHub" title="ryantstone"><img src="/assets/landing/contributors/ryantstone.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/bryanrezende" aria-label="bryanrezende on GitHub" title="bryanrezende"><img src="/assets/landing/contributors/bryanrezende.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/atomicguy" aria-label="atomicguy on GitHub" title="atomicguy"><img src="/assets/landing/contributors/atomicguy.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/mmurali88" aria-label="mmurali88 on GitHub" title="mmurali88"><img src="/assets/landing/contributors/mmurali88.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/HoChiPants" aria-label="HoChiPants on GitHub" title="HoChiPants"><img src="/assets/landing/contributors/HoChiPants.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li class="avatar"><a href="https://github.com/gpambrozio" aria-label="gpambrozio on GitHub" title="gpambrozio"><img src="/assets/landing/contributors/gpambrozio.jpg" alt="" width="46" height="46" loading="lazy"></a></li>
+            <li><a class="more" href="https://github.com/TortugaPower/BookPlayer/graphs/contributors" aria-label="See all 42 contributors on GitHub"><span class="wide-only">+28</span><span class="narrow-only">+34</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 4: Support -->
+    <section class="section bg-light" id="support" aria-labelledby="support-title">
+      <div class="wrap cols support">
+        <div class="col-a support-a">
+          <span class="numeral" aria-hidden="true">04</span>
+          <p class="chapter">Chapter 4</p>
+          <h2 class="h2" id="support-title">Support</h2>
+          <p class="body">Send us an email at <a href="mailto:support@bookplayer.app">support@bookplayer.app</a> or open a new <a href="https://github.com/TortugaPower/BookPlayer/issues">issue on GitHub</a>.</p>
+          <p class="body">Either way, please include the version of BookPlayer you're running (at the bottom of Settings), your device, and its system version.</p>
+          <p class="body muted">We do our best to answer in time, but BookPlayer is a small team's labour of love, so please bear with us.</p>
+          <!-- Narrow screens: Discord comes before "Help us improve" -->
+          <div class="card discord-m narrow-only">
+            <div class="row">
+              <span class="tile"><svg class="ico" width="22" height="22" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <div class="tile-text"><span>Join our Discord</span><span>Talk to other listeners and the people who make BookPlayer.</span></div>
+            </div>
+            <a class="accent-btn" href="https://discord.gg/RPPyhyMPXW">Join the Discord</a>
+          </div>
+        </div>
+        <div class="col-b support-b">
+          <div class="card help">
+            <h2>Help us improve BookPlayer</h2>
+            <p>BookPlayer is open source, and your input and help are always welcome. See how you can contribute and join the list of contributors.</p>
+            <a class="dark-btn" href="https://github.com/TortugaPower/BookPlayer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+              Contribute on GitHub
+            </a>
+          </div>
+          <div class="card discord wide-only">
+            <span class="tile"><svg class="ico" width="22" height="22" aria-hidden="true"><use href="#i-chat"/></svg></span>
+            <div class="tile-text"><span>Join our Discord</span><span>Talk to other listeners and the people who make BookPlayer.</span></div>
+            <a class="accent-btn" href="https://discord.gg/RPPyhyMPXW">Join</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <nav aria-label="Footer">
+        <a href="https://github.com/TortugaPower/BookPlayer">GitHub</a>
+        <a href="https://discord.gg/RPPyhyMPXW">Discord</a>
+        <a href="mailto:support@bookplayer.app">Contact</a>
+        <a href="/delete-account.html">Delete your account</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<!-- Now playing: pinned to the bottom of the window, it follows the page like a book. Hidden until Chapter 1. -->
+<div class="np-dock">
+  <section class="np" aria-label="Reading progress">
+    <img class="np-logo wide-only" src="/logo.png" alt="" width="48" height="48" loading="lazy">
+    <div class="np-info">
+      <div class="np-line">
+        <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span class="wide-only"></span></span>
+        <span class="np-title" aria-live="polite"><span class="np-num">Prologue</span> · <span class="np-name">A wonderful player for your audiobooks</span></span>
+        <span class="np-pct">0%</span>
+      </div>
+      <div class="np-track"><div class="np-fill"></div></div>
+    </div>
+    <div class="np-btns">
+      <button type="button" class="np-prev" aria-label="Previous chapter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20L9 12l10-8z"/><path d="M5 19V5"/></svg>
+      </button>
+      <button type="button" class="np-next" aria-label="Next chapter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4l10 8-10 8z"/><path d="M19 5v14"/></svg>
+      </button>
+    </div>
+  </section>
+</div>
 </body>
 </html>
