@@ -72,6 +72,10 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !menu.hidden) { setMenu(false); toggle.focus(); }
   });
+  // Tabbing out closes the menu, so it doesn't cover the links after it. Clicks outside are handled above.
+  split.addEventListener('focusout', function (e) {
+    if (!menu.hidden && e.relatedTarget && !split.contains(e.relatedTarget)) setMenu(false);
+  });
 
   /* ---------- Phone: switch between App Store and Google Play ---------- */
   document.querySelector('[data-store-switch]').addEventListener('click', function () {
@@ -117,8 +121,10 @@
 
     fill.style.width = (progress * 100).toFixed(2) + '%';
     pct.textContent = Math.round(progress * 100) + '%';
+    // Each mark sits where its chapter starts (top at mid-window), so the fill reaches it as the label changes.
     marks.forEach(function (m, i) {
-      m.style.left = (max > 0 ? Math.min(tops[i] / max, 1) * 100 : 0).toFixed(2) + '%';
+      var at = max > 0 ? Math.min(Math.max((tops[i] - h / 2) / max, 0), 1) : 0;
+      m.style.left = (at * 100).toFixed(2) + '%';
     });
     var text = current === 0 ? 'Prologue' : (narrow.matches ? 'Ch. ' : 'Chapter ') + current;
     if (current !== chapter || num.textContent !== text) {
@@ -133,9 +139,20 @@
 
   function go(step) {
     var target = Math.max(0, Math.min(ids.length, Math.max(chapter, 0) + step));
-    var tops = [0].concat(starts());
-    window.scrollTo({ top: tops[target], behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    var top = [0].concat(starts())[target];
+    // Next on the last chapter goes to the end of the page, not back up to where that chapter starts.
+    if (step > 0 && target === chapter) top = root.scrollHeight - window.innerHeight;
+    window.scrollTo({ top: top, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
   }
+
+  // Browsers only scroll a focused link into view when it's off-screen, so one that lands
+  // behind the fixed bar while tabbing stays hidden. Scroll until it clears the bar; the
+  // timeout lets the browser's own focus scroll start first, so this one wins.
+  document.addEventListener('focusin', function (e) {
+    if (!bar.classList.contains('is-on') || bar.contains(e.target)) return;
+    var need = e.target.getBoundingClientRect().bottom + window.pageYOffset - bar.getBoundingClientRect().top + 16;
+    setTimeout(function () { if (window.pageYOffset < need) window.scrollTo({ top: need }); }, 0);
+  });
 
   bar.querySelector('.np-prev').addEventListener('click', function () { go(-1); });
   bar.querySelector('.np-next').addEventListener('click', function () { go(1); });

@@ -18,7 +18,10 @@ button { font: inherit; }
 
 :where(a) { color: #2a6fae; }
 :where(a):hover { color: #1d5288; }
-a:focus-visible, button:focus-visible { outline: 3px solid #9cc6ec; outline-offset: 3px; border-radius: 12px; }
+a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offset: 3px; border-radius: 12px; }
+/* On the blue hero and the dark footer a light ring shows better; the platform menu is white again. */
+.hero a:focus-visible, .hero button:focus-visible, .footer a:focus-visible { outline-color: #9cc6ec; }
+.platforms button:focus-visible { outline-color: #2969a3; }
 
 .page { overflow-x: hidden; overflow-x: clip; }
 .wrap { max-width: 1180px; margin: 0 auto; }
@@ -44,7 +47,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #9cc6ec; outline-offs
 
 /* ---------- Hero ---------- */
 .hero {
-  position: relative; z-index: 1; overflow: hidden;
+  /* clip, not just hidden: a hidden box can still be scrolled by links and focus, which pushed the nav out of view */
+  position: relative; z-index: 1; overflow: hidden; overflow: clip;
   background: linear-gradient(180deg, #3a74c8 0%, #3f5cd1 100%);
   color: #fff; padding: 0 24px 110px;
 }
@@ -75,9 +79,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid #9cc6ec; outline-offs
   padding-top: 32px;
 }
 .hero-copy { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
-.eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .85); }
+.eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #fff; }
 .hero h1 { font-size: clamp(40px, 5vw, 60px); line-height: 1.06; font-weight: 800; letter-spacing: -.025em; }
-.lead { max-width: 520px; font-size: 19px; line-height: 1.5; color: rgba(255, 255, 255, .9); }
+.lead { max-width: 520px; font-size: 19px; line-height: 1.5; color: #fff; }
 
 /* Which download block shows is decided by device, not width (see the script in <head>). */
 .dl-phone, .lead-phone { display: none; }
@@ -85,6 +89,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #9cc6ec; outline-offs
 .is-phone .lead-phone { display: block; }
 .is-phone .dl-phone { display: flex; }
 html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
+.ipad-only, .is-ipad .not-ipad { display: none; }
+.is-ipad .ipad-only { display: inline; }
 
 /* Desktop: split button for the computer you're on, others in the menu */
 .dl-desktop { display: flex; flex-direction: column; gap: 24px; }
@@ -99,9 +105,10 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
   font-size: 21px; font-weight: 700; letter-spacing: -.01em;
 }
 .split-main svg { width: 24px; height: 24px; flex: none; }
-/* Not released yet: keep the button's shape, lower the emphasis of its contents. */
-.split-main[disabled] { cursor: default; }
-.split-main[disabled] > :not(.soon) { opacity: .75; }
+/* Not released yet: keep the button's shape, lower the emphasis of its contents.
+   aria-disabled (not disabled) keeps it in the tab order, so keyboard users hear "Coming soon". */
+.split-main[aria-disabled="true"] { cursor: default; }
+.split-main[aria-disabled="true"] > :not(.soon) { opacity: .75; }
 .soon {
   flex: none; padding: 4px 9px; border-radius: 999px; background: #e7f1f9; color: #2969a3;
   font-size: 12px; font-weight: 600; letter-spacing: 0; line-height: 1.2;
@@ -122,11 +129,11 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
 }
 .platforms button[aria-current="true"] { background: #e7f1f9; }
 .platforms button span + span { font-size: 13px; font-weight: 500; color: #5f5e64; }
-.dl-alt { font-size: 16px; color: rgba(255, 255, 255, .9); }
+.dl-alt { font-size: 16px; color: #fff; }
 .hero-link { color: #fff; font-weight: 600; text-underline-offset: 3px; }
 
 .on-phone { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding-top: 4px; }
-.on-phone-label { font-size: 14px; color: rgba(255, 255, 255, .82); margin-right: 2px; }
+.on-phone-label { font-size: 14px; color: #fff; margin-right: 2px; }
 .outline-btn {
   display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
   border: 1.5px solid rgba(255, 255, 255, .45); border-radius: 12px;
@@ -142,14 +149,14 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
   font-size: 19px; font-weight: 700; letter-spacing: -.01em; box-shadow: 0 10px 28px rgba(5, 15, 35, .28);
 }
 .store-btn svg { width: 22px; height: 22px; flex: none; }
-.store-note { text-align: center; font-size: 14px; color: rgba(255, 255, 255, .82); }
+.store-note { text-align: center; font-size: 14px; color: #fff; }
 .store-switch {
   padding: 12px 2px; border: 0; background: transparent; color: #fff; font-weight: 600;
   text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
 }
 .also-on {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 8px;
-  font-size: 15px; color: rgba(255, 255, 255, .88);
+  font-size: 15px; color: #fff;
 }
 .also-on .hero-link, .also-on .soon-text { padding: 12px 0; }
 .also-on .nowrap { white-space: nowrap; }
@@ -157,7 +164,8 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
 .soon-text b { font-weight: 600; }
 
 /* Phone mockup */
-.mockup { flex: 0 1 440px; align-self: flex-end; display: flex; justify-content: center; margin-bottom: -200px; }
+/* Auto side margins centre the phone when it wraps below the copy (roughly 700–1015px wide) */
+.mockup { flex: 0 1 440px; align-self: flex-end; display: flex; justify-content: center; margin: 0 auto -200px; }
 .device {
   position: relative; width: 372px; height: 790px; flex: none; padding: 11px;
   background: #1c1c1e; border-radius: 62px;
@@ -405,6 +413,9 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
   .contrib-text h3 { font-size: 19px; }
   .avatars .avatar:nth-child(n+9) { display: none; }
   .avatars img, .avatars .more { width: 44px; height: 44px; }
+  /* A tighter overlap keeps 8 avatars and "+34" inside the card on 360px-wide phones */
+  .avatars { padding-left: 14px; }
+  .avatars li { margin-left: -14px; }
 
   .cols.support { gap: 40px; }
   .support-a { gap: 14px; }
