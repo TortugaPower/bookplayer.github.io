@@ -89,8 +89,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offs
 .is-phone .lead-phone { display: block; }
 .is-phone .dl-phone { display: flex; }
 html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
-.ipad-only, .is-ipad .not-ipad { display: none; }
-.is-ipad .ipad-only { display: inline; }
 
 /* Desktop: split button for the computer you're on, others in the menu */
 .dl-desktop { display: flex; flex-direction: column; gap: 24px; }
@@ -143,23 +141,13 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
 /* Phone: the store for the phone you're on */
 .dl-phone { flex-direction: column; gap: 20px; align-self: flex-start; }
 .dl-phone .dl-block { padding-top: 8px; }
-.store-btn {
-  display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 58px; padding: 0 20px;
-  background: #fff; color: #2969a3; text-decoration: none; border-radius: 14px;
-  font-size: 19px; font-weight: 700; letter-spacing: -.01em; box-shadow: 0 10px 28px rgba(5, 15, 35, .28);
-}
-.store-btn svg { width: 22px; height: 22px; flex: none; }
-.store-note { text-align: center; font-size: 14px; color: #fff; }
-.store-switch {
-  padding: 12px 2px; border: 0; background: transparent; color: #fff; font-weight: 600;
-  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
-}
-.also-on {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 8px;
-  font-size: 15px; color: #fff;
-}
-.also-on .hero-link, .also-on .soon-text { padding: 12px 0; }
-.also-on .nowrap { white-space: nowrap; }
+/* The official badge for the visitor's store (Apple's and Google's artwork, unmodified) */
+.store-badge { align-self: center; border-radius: 9px; }
+.store-badge img { display: block; height: 56px; width: auto; }
+/* Under the badge: the other phone and the web as outline buttons (the computer row's look), then the desktop note */
+.dl-phone .also-row { justify-content: center; padding-top: 0; }
+.dl-phone .also-row .on-phone-label { text-align: center; }
+.soon-line { text-align: center; font-size: 14px; color: #fff; }
 .soon-text { color: #fff; }
 .soon-text b { font-weight: 600; }
 
@@ -202,7 +190,9 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
 .ico { stroke: #2969a3; }
 
 /* Chapter 1 */
-.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+/* Fixed column counts keep the 8 cards in even rows: 4 per row, or 2 per row on tablets and small windows. */
+.features { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 999.98px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .feature { display: flex; gap: 16px; padding: 22px; background: #fcfbfc; border-radius: 12px; }
 .feature svg { flex: none; width: 24px; height: 24px; }
 .feature div { display: flex; flex-direction: column; gap: 4px; }
