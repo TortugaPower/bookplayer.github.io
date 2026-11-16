@@ -3,3 +3,6 @@ _site/
 .jekyll-cache/
 .jekyll-gems/
 .sass-cache/
+
+# Python bytecode from running .github/scripts locally
+__pycache__/
