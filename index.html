@@ -25,7 +25,6 @@
     var iPadOS = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
     if (/iPhone|iPod|iPad|Android/i.test(ua) || iPadOS) d.className += ' is-phone';
     if (/Android/i.test(ua)) d.className += ' is-android';
-    if (/iPad/.test(ua) || iPadOS) d.className += ' is-ipad';
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,7 +93,7 @@
           <div class="on-phone">
             <span class="on-phone-label">On your phone</span>
             <a class="outline-btn" href="https://apps.apple.com/app/id1138219998">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
               App Store
             </a>
             <a class="outline-btn" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer">
@@ -107,22 +106,26 @@
         <!-- Phone: the store for the phone you're on -->
         <div class="dl-phone">
           <div class="dl-block">
-            <a class="store-btn only-ios" href="https://apps.apple.com/app/id1138219998">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
-              <span>Download for <span class="not-ipad">iPhone</span><span class="ipad-only">iPad</span></span>
-            </a>
-            <a class="store-btn only-android" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>
-              <span>Download for Android</span>
-            </a>
-            <p class="store-note">Free on <span class="only-ios">the App Store</span><span class="only-android">Google Play</span> · <button type="button" class="store-switch" data-store-switch>On <span class="only-ios">Android</span><span class="only-android">iPhone</span>?</button></p>
+            <a class="store-badge only-ios" href="https://apps.apple.com/app/id1138219998"><img src="/appstore-badge.svg" alt="Download on the App Store" width="168" height="56"></a>
+            <a class="store-badge only-android" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer"><img src="/googleplay-badge.svg" alt="Get it on Google Play" width="189" height="56"></a>
           </div>
-          <!-- Computers and the browser, quieter -->
-          <p class="also-on">
-            <span>Also on</span>
-            <span class="nowrap"><span class="soon-text" id="desktop-soon"><b>Mac, Windows and Linux</b> (coming soon)</span> <span aria-hidden="true">·</span></span>
-            <a class="hero-link" href="https://web.bookplayer.app">the web</a>
-          </p>
+          <!-- The other phone and the browser, as on computers; the desktop apps as a note -->
+          <div class="on-phone also-row">
+            <span class="on-phone-label">Also on</span>
+            <a class="outline-btn only-ios" href="https://play.google.com/store/apps/details?id=com.tortugapower.audiobookplayer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"/></svg>
+              Android
+            </a>
+            <a class="outline-btn only-android" href="https://apps.apple.com/app/id1138219998">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+              iPhone
+            </a>
+            <a class="outline-btn" href="https://web.bookplayer.app">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+              Web
+            </a>
+          </div>
+          <p class="soon-line"><span class="soon-text" id="desktop-soon"><b>Mac, Windows and Linux</b> (coming soon)</span></p>
         </div>
       </div>
 
@@ -152,7 +155,7 @@
         <ul class="features">
           <li class="feature">
             <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M9.5 13l2.5-2 2.5 2"/></svg>
-            <div><h3>Lock screen controls</h3><p>Play, pause and skip from the lock screen, control center or your headphones.</p></div>
+            <div><h3>Lock screen controls</h3><p>Play, pause and skip from the lock screen, control center or your headphones. You choose how far each skip goes.</p></div>
           </li>
           <li class="feature">
             <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
@@ -160,7 +163,7 @@
           </li>
           <li class="feature">
             <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.3 17a9 9 0 1 1 17.4 0"/></svg>
-            <div><h3>Playback speed</h3><p>Slow down a dense chapter or speed through the recap.</p></div>
+            <div><h3>Playback speed</h3><p>Slow down a dense chapter or speed through the recap, anywhere from 0.5× to 4×.</p></div>
           </li>
           <li class="feature">
             <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
@@ -173,6 +176,14 @@
           <li class="feature">
             <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
             <div><h3>Sleep timer</h3><p>Stop after a set time or at the end of the chapter.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+            <div><h3>In the car</h3><p>CarPlay and Android Auto: browse your library and control playback from the dashboard.</p></div>
+          </li>
+          <li class="feature">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="M16.13 7.66l-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="M7.88 16.36l.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg>
+            <div><h3>On your wrist</h3><p>Apple Watch and Wear OS apps put playback controls on your wrist, with watch-face complications.</p></div>
           </li>
         </ul>
       </div>
@@ -189,8 +200,10 @@
             <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>See the progress of every book at a glance</li>
             <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Mark books as finished</li>
             <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Drag and drop to sort your library</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Search your library, and switch between a list and a grid</li>
             <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Group books into folders that play in order, starting from the first one you haven't finished</li>
             <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Bookmarks to come back to a moment</li>
+            <li><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Track your reading on Hardcover</li>
           </ul>
         </div>
 
@@ -200,6 +213,10 @@
             <div class="import">
               <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
               <div class="tile-text"><span>From your files</span><span>Files on iPhone, your Android storage, or drag onto the web and desktop apps</span></div>
+            </div>
+            <div class="import">
+              <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.86a10 10 0 0 1 14 0"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/></svg></span>
+              <div class="tile-text"><span>Wi-Fi transfer</span><span>Send books from your computer's browser to your phone over Wi-Fi</span></div>
             </div>
             <div class="import">
               <span class="tile"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></span>

@@ -1,4 +1,4 @@
-/* BookPlayer landing: platform menu, store switch and the "Now playing" chapter bar. */
+/* BookPlayer landing: platform menu and the "Now playing" chapter bar. */
 (function () {
   'use strict';
 
@@ -75,11 +75,6 @@
   // Tabbing out closes the menu, so it doesn't cover the links after it. Clicks outside are handled above.
   split.addEventListener('focusout', function (e) {
     if (!menu.hidden && e.relatedTarget && !split.contains(e.relatedTarget)) setMenu(false);
-  });
-
-  /* ---------- Phone: switch between App Store and Google Play ---------- */
-  document.querySelector('[data-store-switch]').addEventListener('click', function () {
-    root.classList.toggle('is-android');
   });
 
   /* ---------- Now playing ---------- */
