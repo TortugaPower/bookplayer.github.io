@@ -34,7 +34,7 @@ PR head only (`fetch-depth: 1`): there is no `origin/main` ref and no `gh` acces
    `index.html`.
 3. Check both layouts. The wide rules come first in `landing.css`; the narrow layout is the
    `@media (max-width: 699.98px)` block at the end. Which download block shows is decided by device, not width:
-   the inline script in `<head>` adds `is-phone`, `is-android` and `is-ipad` to `<html>`.
+   the inline script in `<head>` adds `is-phone` and `is-android` to `<html>`.
 4. Comment **only on lines changed by this PR**, in changed files.
 
 ## What to skip

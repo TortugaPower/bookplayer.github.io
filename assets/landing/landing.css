@@ -190,7 +190,9 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
 .ico { stroke: #2969a3; }
 
 /* Chapter 1 */
-.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+/* Fixed column counts keep the 8 cards in even rows: 4 per row, or 2 per row on tablets and small windows. */
+.features { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 999.98px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .feature { display: flex; gap: 16px; padding: 22px; background: #fcfbfc; border-radius: 12px; }
 .feature svg { flex: none; width: 24px; height: 24px; }
 .feature div { display: flex; flex-direction: column; gap: 4px; }
