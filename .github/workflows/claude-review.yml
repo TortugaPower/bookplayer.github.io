@@ -12,7 +12,7 @@ name: Claude PR Review
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]
-    branches: [master]
+    branches: [main]
 
 # Cancel an in-flight review when the PR is updated again (saves API cost on rapid pushes).
 concurrency:
@@ -31,7 +31,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
-    # The secrets live in this environment, whose deployment-branch policy is `master`. Under
+    # The secrets live in this environment, whose deployment-branch policy is `main`. Under
     # `pull_request_target` the run's ref IS the base branch, so this job qualifies; a `pull_request` run (ref
     # `refs/pull/N/merge`) does not, however its workflow file is edited. The environment is created on first use;
     # the branch policy and the move of the two secrets into it are repository settings — see the README.

@@ -1,6 +1,6 @@
 # The AI PR reviewer
 
-Runs on every push to a PR against `master` (`.github/workflows/claude-review.yml`), reviews the
+Runs on every push to a PR against `main` (`.github/workflows/claude-review.yml`), reviews the
 diff with a Claude agent, and keeps the result as review comments on the PR. **The VERDICT is advisory** — a
 `fail` never blocks a merge, and a human still merges. The check goes red only when the harness itself could not
 run or could not post its result: a failed install, a red `node --test test/`, or a summary that could not be
@@ -103,7 +103,7 @@ in code that was already covered by a test that could not see them.
 DRY_RUN=1 \
 ANTHROPIC_API_KEY=… GITHUB_TOKEN=$(gh auth token) \
 GITHUB_REPOSITORY=TortugaPower/bookplayer.github.io PR_NUMBER=4 \
-COMMIT=$(gh pr view 4 --json headRefOid --jq .headRefOid) BASE_REF=master \
+COMMIT=$(gh pr view 4 --json headRefOid --jq .headRefOid) BASE_REF=main \
 RUNNER_TEMP=/tmp/reviewer \
 node .github/claude/reviewer/review.mjs
 ```
@@ -159,7 +159,7 @@ never fires here and `allow-unsafe-pr-checkout` stays unset.
 
 **The secrets belong in the `reviewer` environment, not in repository secrets.** That is the step that makes the
 above hold repository-wide: any *other* `pull_request` workflow can be edited by a pull request to print a
-repository secret, but an environment whose deployment-branch policy is `master` hands its secrets only to runs
+repository secret, but an environment whose deployment-branch policy is `main` hands its secrets only to runs
 whose ref is that branch — which a `pull_request_target` run is and a `pull_request` run
 (`refs/pull/N/merge`) is not. The environment is created on the workflow's first run; the branch policy and the
 move of `ANTHROPIC_API_KEY` and `REVIEW_RESOLVE_TOKEN` into it (and their deletion at repository level) are
