@@ -1,0 +1,37 @@
+# Refreshes the contributors card on the landing page (count, top avatars, "+N" bubbles)
+# every Monday, and on demand from the Actions tab ("Run workflow").
+#
+# GitHub switches scheduled workflows off after 60 days without activity in this repository.
+# When that happens, turn it back on from the Actions tab ("Enable workflow").
+name: Update contributors
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh the contributors card
+        run: python3 .github/scripts/update_contributors.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Commit and push if anything changed
+        run: |
+          git add -A index.html assets/landing/contributors
+          if git diff --cached --quiet; then
+            echo "Contributors are up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update contributors"
+          git push
