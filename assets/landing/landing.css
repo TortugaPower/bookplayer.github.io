@@ -21,7 +21,7 @@ button { font: inherit; }
 a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offset: 3px; border-radius: 12px; }
 /* On the blue hero and the dark footer a light ring shows better; the platform menu is white again. */
 .hero a:focus-visible, .hero button:focus-visible, .footer a:focus-visible { outline-color: #9cc6ec; }
-.platforms button:focus-visible { outline-color: #2969a3; }
+.platforms button:focus-visible, .gh-list a:focus-visible { outline-color: #2969a3; }
 
 .page { overflow-x: hidden; overflow-x: clip; }
 .wrap { max-width: 1180px; margin: 0 auto; }
@@ -53,7 +53,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offs
   color: #fff; padding: 0 24px 110px;
 }
 .nav {
-  position: relative; z-index: 1; max-width: 1180px; margin: 0 auto;
+  /* Above .hero-main, so the GitHub menu opens over the hero instead of under it */
+  position: relative; z-index: 2; max-width: 1180px; margin: 0 auto;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
   padding: 24px 0;
 }
@@ -69,9 +70,23 @@ a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offs
 .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .nav-link { color: #fff; text-decoration: none; font-size: 15px; font-weight: 500; padding: 12px 14px; }
 .nav-gh {
-  color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 11px 16px;
+  display: flex; align-items: center; gap: 6px; background: transparent; cursor: pointer;
+  color: #fff; font-size: 15px; font-weight: 600; padding: 11px 14px 11px 16px;
   border: 1.5px solid rgba(255, 255, 255, .55); border-radius: 12px;
 }
+/* GitHub menu: one entry per app repository, styled like the platform menu */
+.gh-menu { position: relative; }
+.gh-list {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 4; min-width: 220px;
+  padding: 6px; background: #fff; border-radius: 14px; box-shadow: 0 14px 36px rgba(5, 15, 35, .3);
+}
+.gh-list[hidden] { display: none; }
+.gh-list a {
+  min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 14px; border-radius: 10px; color: #242320; text-decoration: none; font-size: 15px; font-weight: 600;
+}
+.gh-list a:hover { background: #e7f1f9; color: #242320; }
+.gh-list a span + span { font-size: 13px; font-weight: 500; color: #5f5e64; }
 
 .hero-main {
   position: relative; z-index: 1; max-width: 1180px; margin: 0 auto;
@@ -333,7 +348,7 @@ html:not(.is-android) .only-android, .is-android .only-ios { display: none; }
   .nav-links { flex-wrap: nowrap; gap: 0; }
   .nav-link { padding: 12px 10px; }
   .nav-link + .nav-link { padding: 12px 0 12px 10px; }
-  .nav-gh { display: none; }
+  .gh-menu { display: none; }
 
   .hero-main { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0; padding-top: 24px; }
   .hero-copy { flex: none; gap: 20px; }
