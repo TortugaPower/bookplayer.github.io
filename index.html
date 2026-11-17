@@ -56,7 +56,17 @@
       <div class="nav-links">
         <a class="nav-link" href="#features">Features</a>
         <a class="nav-link" href="#support">Support</a>
-        <a class="nav-gh" href="https://github.com/TortugaPower/BookPlayer">GitHub</a>
+        <!-- The source code of each app; add a line here when another repository goes public -->
+        <div class="gh-menu">
+          <button type="button" class="nav-gh" aria-expanded="false" aria-controls="gh-list">
+            GitHub
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul class="gh-list" id="gh-list" aria-label="Source code" hidden>
+            <li><a href="https://github.com/TortugaPower/BookPlayer"><span>iOS app</span><span>Swift</span></a></li>
+            <li><a href="https://github.com/TortugaPower/bookplayer-android"><span>Android app</span><span>Kotlin</span></a></li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -345,7 +355,8 @@
   <footer class="footer">
     <div class="wrap">
       <nav aria-label="Footer">
-        <a href="https://github.com/TortugaPower/BookPlayer">GitHub</a>
+        <a href="https://github.com/TortugaPower/BookPlayer">iOS on GitHub</a>
+        <a href="https://github.com/TortugaPower/bookplayer-android">Android on GitHub</a>
         <a href="https://discord.gg/RPPyhyMPXW">Discord</a>
         <a href="mailto:support@bookplayer.app">Contact</a>
         <a href="/delete-account.html">Delete your account</a>

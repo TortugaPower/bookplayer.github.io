@@ -1,4 +1,4 @@
-/* BookPlayer landing: platform menu and the "Now playing" chapter bar. */
+/* BookPlayer landing: the platform and GitHub menus, and the "Now playing" chapter bar. */
 (function () {
   'use strict';
 
@@ -30,6 +30,31 @@
     soon.replaceWith(soonLink);
   }
 
+  /* ---------- Dropdowns: the platform menu and the GitHub menu ---------- */
+  // Opens and closes `list` from `toggle`. Clicking outside `box`, Escape, or tabbing out of `box` closes it,
+  // so an open menu never sits over the links after it. Returns the setter.
+  function dropdown(box, toggle, list) {
+    function set(open) {
+      list.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function () { set(list.hidden); });
+    document.addEventListener('click', function (e) {
+      if (!list.hidden && !box.contains(e.target)) set(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !list.hidden) { set(false); toggle.focus(); }
+    });
+    box.addEventListener('focusout', function (e) {
+      if (!list.hidden && e.relatedTarget && !box.contains(e.relatedTarget)) set(false);
+    });
+    return set;
+  }
+
+  /* ---------- GitHub menu: one entry per app repository ---------- */
+  var gh = document.querySelector('.gh-menu');
+  dropdown(gh, gh.querySelector('.nav-gh'), gh.querySelector('.gh-list'));
+
   /* ---------- Platform menu: the computer you're on first ---------- */
   var split = document.querySelector('[data-platforms]');
   var toggle = split.querySelector('.split-toggle');
@@ -52,29 +77,14 @@
     });
   }
 
-  function setMenu(open) {
-    menu.hidden = !open;
-    toggle.setAttribute('aria-expanded', String(open));
-  }
-
+  var setMenu = dropdown(split, toggle, menu);
   setPlatform(detectPlatform());
-  toggle.addEventListener('click', function () { setMenu(menu.hidden); });
   picks.forEach(function (b) {
     b.addEventListener('click', function () {
       setPlatform(b.getAttribute('data-platform'));
       setMenu(false);
       toggle.focus();
     });
-  });
-  document.addEventListener('click', function (e) {
-    if (!menu.hidden && !split.contains(e.target)) setMenu(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !menu.hidden) { setMenu(false); toggle.focus(); }
-  });
-  // Tabbing out closes the menu, so it doesn't cover the links after it. Clicks outside are handled above.
-  split.addEventListener('focusout', function (e) {
-    if (!menu.hidden && e.relatedTarget && !split.contains(e.relatedTarget)) setMenu(false);
   });
 
   /* ---------- Now playing ---------- */
