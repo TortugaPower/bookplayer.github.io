@@ -71,7 +71,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #2969a3; outline-offs
 .nav-link { color: #fff; text-decoration: none; font-size: 15px; font-weight: 500; padding: 12px 14px; }
 .nav-gh {
   display: flex; align-items: center; gap: 6px; background: transparent; cursor: pointer;
-  color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 11px 14px 11px 16px;
+  color: #fff; font-size: 15px; font-weight: 600; padding: 11px 14px 11px 16px;
   border: 1.5px solid rgba(255, 255, 255, .55); border-radius: 12px;
 }
 /* GitHub menu: one entry per app repository, styled like the platform menu */
